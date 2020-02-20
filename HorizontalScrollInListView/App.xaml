@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:HorizontalScrollInListView"
+             xmlns:local1="clr-namespace:XamarinDifferentCells"
+             mc:Ignorable="d"
+             x:Class="HorizontalScrollInListView.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="AnimalTemplate">
+                <ViewCell>
+                    <StackLayout Margin="10">
+                        <Label d:Text="{ Binding . }"
+                           Text="{ Binding Name }"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AnimalListTemplate">
+                <ViewCell>
+                    <CarouselView ItemsSource="{Binding List}"
+                                  BackgroundColor="Blue"
+                                  HeightRequest="100"
+                                  HorizontalScrollBarVisibility="Never">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                           SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Start" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label Text="{Binding Name}"
+                                                    TextColor="White"
+                                                   FontAttributes="Bold"
+                                                   FontSize="Large"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </ViewCell>
+            </DataTemplate>
+
+
+            <local:MyTemplateSelector x:Key="MyTemplateSelector"
+            AnimalListTemplate="{StaticResource AnimalListTemplate}"
+            AnimalTemplate="{StaticResource AnimalTemplate}"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
